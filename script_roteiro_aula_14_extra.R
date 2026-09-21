@@ -78,6 +78,12 @@ dados_aula14$PAM[as.integer(dados_aula14$TIPO_VEICULO) == 2] <- NA
 # TAIC: total de compradores com perfil AIC
 # TGIC: total de compradores com perfil GIC
 
+BANCO_AULA14_RJ <- as.data.frame(table(dados_aula14$MUNICIPIO))
+names(BANCO_AULA14_RJ) <- c("CODIGO", "TVV")
+
+original <- read.csv("banco 2 SINASC.csv", header=TRUE, sep=";")
+TVRC <- as.data.frame(table(original$MUNICIPIO[!is.na(original)]))
+
 # Ao terminar a Tarefa 4 commit com a mensagem " script - tarefa 1 a 4" e envie para o repositório Aula_14_Extra
 
 
