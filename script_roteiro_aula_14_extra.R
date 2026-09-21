@@ -33,6 +33,17 @@ dados_aula14$F_IDADE <- factor(dados_aula14$F_IDADE, levels = 0:1, labels = c("2
 # criar a variável PAM (somente quando TIPO_VEICULO = "Carro"), de acordo com IDADE_PROPRIETARIO e SEXO_PROPRIETARIO, com as seguintes categorias:
 # PAM = "PIC", se VALOR_VEICULO < VALOR_P10; "AIC", se VALOR_P10 <= VALOR_VEICULO <= VALOR_P90; "GIC", se VALOR_VEICULO > VALOR_P90
 
+tabela_pam = read.csv(file = "Tabela_PAM.csv", header=TRUE, sep = ";")
+
+dados_aula14 <- merge(dados_aula14, tabela_pam, all.x = TRUE)
+
+dados_aula14$PAM <- ifelse(dados_aula14$VALOR_VEICULO < dados_aula14$VALOR_P10 & !is.na(dados_aula14$VALOR_P10) & !is.na(dados_aula14$VALOR_VEICULO), "PIC", "AIC")
+
+dados_aula14$PAM[dados_aula14$VALOR_VEICULO > dados_aula14$VALOR_P90] <- "GIC"
+
+#levels(dados_aula14$TIPO_VEICULO)
+dados_aula14$PAM[as.integer(dados_aula14$TIPO_VEICULO) == 2] <- NA
+
 # Ao terminar a Tarefa 3 commit com a mensagem " script - tarefa 1 a 3" e envie para o repositório Aula_14_Extra
 
  
